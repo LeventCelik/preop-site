@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Nasıl çalışır? · Pre-op Dağılımı</title>
+    <link rel="stylesheet" crossorigin href="/preop-site/assets/rehber-dNawASrg.css">
+    <link rel="stylesheet" crossorigin href="/preop-site/assets/style-owbjzB9X.css">
+  </head>
+  <body>
+    <!-- The team's guide. It states the rules of src/rules.ts in words: change both together (tests/guide.test.ts checks the names, weights and fees). -->
+    <main class="guide">
+      <header>
+        <a class="back" href="./">← Dağılıma dön</a>
+        <h1>Nasıl çalışır?</h1>
+        <p class="hint">
+          Bu sayfa sabahki pre-op listesini okur ve her kıdemin, her hekimin kaç hasta alacağını hesaplar. Tabloya hiçbir şey
+          yazmaz; hasta adlarını ne gösterir ne de saklar.
+        </p>
+      </header>
+
+      <section>
+        <h2>Sayfa tabloyu nasıl okur?</h2>
+        <figure>
+          <table class="sheet">
+            <thead>
+              <tr><th class="corner"></th><th>A</th><th>B</th><th>C</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>1</th><td class="title">Mh3 16.00</td><td class="title">KVC 16.00</td><td class="off">Dr. A 🦊</td></tr>
+              <tr><th>2</th><td class="patient">Hasta 4B 🐘</td><td class="patient">Hasta a1</td><td class="off">Dr. B 🐝</td></tr>
+              <tr><th>3</th><td class="patient">Hasta 6A</td><td class="patient">Hasta c3 *</td><td class="off">Dr. C 🦉</td></tr>
+              <tr><th>4</th><td class="blank">boş</td><td class="patient">Hasta b2 🐙</td><td class="off">Dr. D 🐙</td></tr>
+              <tr><th>5</th><td class="patient">Hasta 8C</td><td class="blank">boş</td><td class="off">Dr. E 🐞</td></tr>
+              <tr><th>6</th><td class="blank">boş</td><td class="blank">boş</td><td></td></tr>
+              <tr><th>7</th><td class="blank">boş</td><td class="note">yarına</td><td></td></tr>
+              <tr><th>8</th><td class="note">not</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <figcaption>
+            <span class="key patient">Hasta</span>
+            <span class="key blank">Boş hücre</span>
+            <span class="key note">Not (sayılmaz)</span>
+            <span class="key off">Okunmaz</span>
+          </figcaption>
+        </figure>
+        <p>Bu örnekte Mh3'te 3 hasta var (A2, A3 ve A5). KVC'de de 3 hasta var; B3'teki yıldızlı.</p>
+        <ul>
+          <li>
+            <b>İlk satırdaki her başlık bir lokasyondur.</b> Sondaki saate (16.00) bakılmaz. Başlıkta <b>KVC</b> ya da <b>YBÜ</b>
+            geçiyorsa (büyük-küçük harf fark etmez), o sütundaki hastalar KVC ya da YBÜ hastası sayılır.
+          </li>
+          <li>
+            <b>Başlığın altındaki her dolu hücre bir hastadır;</b> hücrede ne yazdığı fark etmez. Hekimlerin koyduğu emojiler de
+            sayıyı değiştirmez.
+          </li>
+          <li><b>Arada tek bir boş hücre varsa atlanır:</b> A4 boş, ama A5 yine hasta sayılır.</li>
+          <li>
+            <b>Art arda iki boş hücreden sonrası not sayılır,</b> hasta sayısına katılmaz: örnekte A8 ve B7. Sayfa bu hücreleri en
+            altta adresleriyle gösterir. Aslında hastaysalar aradaki boş hücreleri silin.
+          </li>
+          <li>
+            <b>En sağdaki emojili sütun hekim listesidir ve okunmaz,</b> çünkü listede o gün gelmeyen hekimler de var. Lokasyonlar
+            bu sütunun solundaki sütunlardır.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Hekim sayıları</h2>
+        <figure>
+          <table class="sheet counts">
+            <thead>
+              <tr><th class="corner"></th><th>E</th><th>F</th><th class="aside"></th></tr>
+            </thead>
+            <tbody>
+              <tr><th>1</th><td class="off">Dr. A 🦊</td><td class="title date">07.10</td><td class="aside">tarih</td></tr>
+              <tr><th>2</th><td class="off">Dr. B 🐝</td><td class="count hardal">7</td><td class="aside">Hardal</td></tr>
+              <tr><th>3</th><td class="off">Dr. C 🦉</td><td class="count gri">5</td><td class="aside">Gri</td></tr>
+              <tr><th>4</th><td class="off">Dr. D 🐙</td><td class="count mor">8</td><td class="aside">Mor</td></tr>
+            </tbody>
+          </table>
+        </figure>
+        <ul>
+          <li>
+            Günün hekim sayıları, tablolardan birinde tek bir sütuna yazılır: en üste tarih, altına sırasıyla Hardal, Gri ve Mor
+            hekim sayısı. Şu an bu sütun ikinci tablonun F sütunu; sayfa onu otomatik olarak bulur.
+          </li>
+          <li>Tarih bugünün tarihi değilse sayfa uyarı verir, çünkü sayılar dünden kalmış olabilir.</li>
+          <li>
+            Sayıları kendi telefonunuzda değiştirebilirsiniz; bu yalnızca sizin ekranınızı etkiler. <b>Tablodaki sayılara dön</b>
+            düğmesi değişikliğinizi geri alır.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>İşaretler</h2>
+        <table class="marks">
+          <thead>
+            <tr><th>İşaret</th><th>Anlamı</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>KVC</b> sütunu</td><td>Yalnızca Mor alır. Mor, payını önce KVC hastalarıyla doldurur.</td></tr>
+            <tr><td>KVC hücresinde <code>*</code></td><td>Bu KVC hastasını Gri de alabilir. Yıldız hücrenin herhangi bir yerinde olabilir.</td></tr>
+            <tr><td>Hücrede <code>Tx</code></td><td>Hasta, hangi sütunda olursa olsun Gri'ye gider.</td></tr>
+            <tr>
+              <td>Hücrede <code>FTR</code>, <code>Klinik Gözlem</code> ya da <code>YGAPH</code></td>
+              <td>Uzak servis. Yol için <b>+3</b> hasta eklenir ve kişi başı sayılara dağıtılır; oraya kimin gideceğine siz karar verirsiniz.</td>
+            </tr>
+            <tr><td>Diğer sütunlar (<b>YBÜ</b> dâhil)</td><td>Her kıdem alabilir.</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">
+          Kelimeye bitişik emoji sorun olmaz: "ftr🐘" de FTR sayılır. Hücrede "fttr" ya da başlıkta "ybi" gibi bir yazım hatasında
+          ise sayfa, yazılanı göstererek uyarı verir; düzeltilene kadar hasta uzak servis, sütun da YBÜ sayılmaz.
+        </p>
+      </section>
+
+      <section>
+        <h2>Dağılım nasıl hesaplanır?</h2>
+        <ul>
+          <li><b>Ağırlıklar: Hardal 4 · Gri 2 · Mor 1.</b> Yani bir Hardal hekimi, bir Mor hekiminin dört katı hasta alır.</li>
+          <li>
+            <b>Önce yalnızca tek kıdemin alabildiği hastalar dağıtılır</b> (KVC Mor'a, Tx Gri'ye), sonra yıldızlı KVC, en son da
+            herkesin alabildiği hastalar.
+          </li>
+          <li>
+            <b>Önce alt kıdemler paylarını doldurur, sonra üst kıdemlere hasta verilir.</b> Hastalar tek tek dağıtılır; her hasta,
+            payına göre en geride kalan hekime gider.
+          </li>
+        </ul>
+        <figure>
+          <details class="card hardal">
+            <summary>
+              <h3>Hardal</h3>
+              <span class="hint">3 hekim</span>
+              <span class="card-total">34 hasta</span>
+              <span class="shares"><span class="share">12</span> <span class="share">11</span> <span class="share">11</span></span>
+            </summary>
+            <ul>
+              <li><span>Mh1 yatan</span><span>18</span></li>
+              <li><span>Mh3</span><span>13</span></li>
+              <li><span>Yol payı (FTR)</span><span>3</span></li>
+            </ul>
+          </details>
+          <figcaption>
+            Kart kapalıyken her hekimin hasta sayısını gösterir; karta dokununca hastaların hangi lokasyonlardan geldiği açılır.
+            Uzak servisin yol payı da bu sayılara eklenir.
+          </figcaption>
+        </figure>
+        <p><b>Kopyala</b> düğmesi, WhatsApp grubuna yapıştırmanız için kısa bir özet kopyalar:</p>
+        <p class="bubble"><b>Pre-op dağılımı</b> (08:42)
+Toplam <b>54</b> hasta
+
+3 Hardal:
+2 kişi 11 · 1 kişi 12
+
+3 Gri:
+2 kişi 6 · 1 kişi 5
+
+2 Mor:
+Kişi başı 3</p>
+      </section>
+
+      <section>
+        <h2>Uyarılar</h2>
+        <dl>
+          <dt>"Mor kıdem … hasta fazla aldı, çünkü işaretsiz KVC"</dt>
+          <dd>Gri'nin de alabileceği KVC hastalarını <code>*</code> ile işaretleyin.</dd>
+          <dt>"… yerine … yazılmak istenmiş olabilir"</dt>
+          <dd>Hücredeki ya da sütun başlığındaki yazım hatasını düzeltin.</dd>
+          <dt>"Tablodaki sayılar … tarihli"</dt>
+          <dd>Tabloya bugünün tarihini ve hekim sayılarını girin.</dd>
+          <dt>"… hastayı alabilecek hekim yok"</dt>
+          <dd>Bu hastaları alabilecek kıdem için bugün 0 hekim girilmiş.</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Veri ve gizlilik</h2>
+        <ul>
+          <!-- The build keeps its own lines (vite.config.ts). -->
+          <li>
+            Sayfa tabloları yalnızca okur. Hasta adlarını göstermez, kaydetmez, hiçbir yere göndermez; telefonda yalnızca tabloların
+            adresi ve sayacın son günü saklanır.
+          </li>
+          <li>
+            Kaç kişinin kullandığını görmek için sayfa her açılışta bir Google formuna kısa bir kayıt gönderir: yalnızca açıldığını ve
+            bu telefonda günün ilk açılışı olup olmadığını. Ad, numara ya da tablo bilgisi gönderilmez. <b>Geri bildirim</b> kutusuna
+            yazdıklarınız da aynı forma gider; oraya hasta adı yazmayın.
+          </li>
+          <li>
+            Tablolar sayfa açıldığında okunur. Sayfaya geri döndüğünüzde veri bir dakikadan eskiyse yeniden okunur; <b>Yenile</b>'ye
+            basarak istediğiniz an güncelleyebilirsiniz.
+          </li>
+          <li>Ekip bağlantısını ekip dışından kimseyle paylaşmayın; bağlantıya sahip olan herkes tabloları açabilir.</li>
+        </ul>
+      </section>
+
+      <footer><a class="back" href="./">← Dağılıma dön</a></footer>
+    </main>
+  </body>
+</html>
